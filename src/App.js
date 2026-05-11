@@ -6,7 +6,7 @@ import Purchase from './components/Purchase';
 import Dashboard from './components/Dashboard';
 import './App.css';
 
-const API = 'http://localhost:3000';
+const API = 'https://vastram-ai-production.up.railway.app';
 
 function App() {
   const [screen, setScreen] = useState('login');
