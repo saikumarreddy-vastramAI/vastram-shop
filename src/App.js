@@ -3,6 +3,7 @@ import Login from './components/Login';
 import CustomerEntry from './components/CustomerEntry';
 import Recommendations from './components/Recommendations';
 import Purchase from './components/Purchase';
+import Dashboard from './components/Dashboard';
 import './App.css';
 
 const API = 'http://localhost:3000';
@@ -33,6 +34,7 @@ function App() {
             setSelectedItems([]);
             setScreen('recommendations');
           }}
+          onDashboard={() => setScreen('dashboard')}
         />
       )}
       {screen === 'recommendations' && (
@@ -60,6 +62,14 @@ function App() {
             setSelectedItems([]);
             setScreen('customer');
           }}
+        />
+      )}
+      {screen === 'dashboard' && (
+        <Dashboard
+          API={API}
+          token={token}
+          shopId={shopId}
+          onBack={() => setScreen('customer')}
         />
       )}
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CustomerEntry({ API, token, shopId, onNext }) {
+function CustomerEntry({ API, token, shopId, onNext, onDashboard }) {
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -72,8 +72,11 @@ function CustomerEntry({ API, token, shopId, onNext }) {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <h1 style={styles.headerTitle}>👗 Vastram AI</h1>
-        <p style={styles.headerSub}>Sundari Sarees — Hyderabad</p>
+        <div>
+          <h1 style={styles.headerTitle}>👗 Vastram AI</h1>
+          <p style={styles.headerSub}>Sundari Sarees — Hyderabad</p>
+        </div>
+        <button style={styles.dashboardBtn} onClick={onDashboard}>📊 Dashboard</button>
       </div>
 
       <div style={styles.content}>
@@ -139,7 +142,6 @@ function CustomerEntry({ API, token, shopId, onNext }) {
             <Label text="Occasion" required />
             <select style={styles.select} value={occasion} onChange={e => setOccasion(e.target.value)}>
               <option value="">Select Occasion</option>
-
               <optgroup label="── Weddings ──">
                 <option value="wedding">Wedding — Bride</option>
                 <option value="wedding reception">Wedding — Reception</option>
@@ -148,7 +150,6 @@ function CustomerEntry({ API, token, shopId, onNext }) {
                 <option value="mehendi">Mehendi / Haldi Function</option>
                 <option value="sangeet">Sangeet Night</option>
               </optgroup>
-
               <optgroup label="── Telugu & South Indian Festivals ──">
                 <option value="Ugadi festival">Ugadi (Telugu New Year)</option>
                 <option value="Dasara festival">Dasara / Vijayadasami</option>
@@ -160,14 +161,12 @@ function CustomerEntry({ API, token, shopId, onNext }) {
                 <option value="Varalakshmi Vratam festival">Varalakshmi Vratam</option>
                 <option value="Navratri festival">Navratri / Garba</option>
               </optgroup>
-
               <optgroup label="── North Indian Festivals ──">
                 <option value="Karva Chauth festival">Karva Chauth</option>
                 <option value="Teej festival">Teej</option>
                 <option value="Holi festival">Holi</option>
                 <option value="Eid festival">Eid</option>
               </optgroup>
-
               <optgroup label="── Religious & Temple ──">
                 <option value="temple visit">Temple Visit / Pooja</option>
                 <option value="griha pravesham">Griha Pravesham / Housewarming</option>
@@ -175,13 +174,11 @@ function CustomerEntry({ API, token, shopId, onNext }) {
                 <option value="naming ceremony">Naming Ceremony</option>
                 <option value="upanayanam">Upanayanam / Thread Ceremony</option>
               </optgroup>
-
               <optgroup label="── Work & Daily ──">
                 <option value="office">Office / Work</option>
                 <option value="casual daily">Casual / Daily Wear</option>
                 <option value="college">College</option>
               </optgroup>
-
               <optgroup label="── Social Events ──">
                 <option value="party">Party / Get-together</option>
                 <option value="birthday">Birthday Celebration</option>
@@ -209,7 +206,9 @@ function CustomerEntry({ API, token, shopId, onNext }) {
               {loading ? '✨ Getting AI Recommendations...' : '✨ Get Saree Recommendations'}
             </button>
 
-            <button style={styles.backButton} onClick={() => { setCustomerInfo(null); setPhone(''); setName(''); setAge(''); }}>
+            <button style={styles.backButton} onClick={() => {
+              setCustomerInfo(null); setPhone(''); setName(''); setAge('');
+            }}>
               ← New Customer
             </button>
           </div>
@@ -223,15 +222,18 @@ const styles = {
   container: { minHeight: '100vh', background: '#F5F5F5' },
   header: {
     background: 'linear-gradient(135deg, #1A1A2E, #0F3460)',
-    padding: '20px 24px', color: 'white'
+    padding: '20px 24px', color: 'white',
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between'
   },
   headerTitle: { margin: 0, fontSize: 24, fontWeight: 'bold' },
   headerSub: { margin: '4px 0 0 0', fontSize: 14, opacity: 0.8 },
-  content: { padding: 20, maxWidth: 500, margin: '0 auto' },
-  card: {
-    background: 'white', borderRadius: 16, padding: 24,
-    marginTop: 20, boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+  dashboardBtn: {
+    background: 'rgba(255,255,255,0.2)', border: 'none',
+    color: 'white', fontSize: 14, borderRadius: 8,
+    padding: '8px 14px', cursor: 'pointer', fontWeight: 'bold'
   },
+  content: { padding: 20, maxWidth: 500, margin: '0 auto' },
+  card: { background: 'white', borderRadius: 16, padding: 24, marginTop: 20, boxShadow: '0 4px 20px rgba(0,0,0,0.08)' },
   cardTitle: { fontSize: 22, fontWeight: 'bold', color: '#1A1A2E', margin: '0 0 6px 0' },
   cardSub: { fontSize: 14, color: '#888', marginBottom: 20 },
   customerBadge: {
