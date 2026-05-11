@@ -11,6 +11,7 @@ function Dashboard({ API, token, shopId, onBack }) {
 
   useEffect(() => {
     loadDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadDashboard = async () => {
